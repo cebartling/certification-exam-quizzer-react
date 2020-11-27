@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {ApolloProvider} from "@apollo/client";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import apolloClient from "./ApolloClient";
+
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from 'firebase';
 
@@ -12,7 +15,6 @@ import 'firebase/analytics';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
 // import 'firebase/firestore';
-
 import initializeFirebaseApp from "./FirebaseInitialization";
 
 
@@ -38,7 +40,9 @@ window.addEventListener('load', function () {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <ApolloProvider client={apolloClient}>
+      <App/>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
