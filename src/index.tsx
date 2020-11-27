@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // Firebase App (the core Firebase SDK) is always required and must be listed first
-import firebase, {User} from 'firebase';
+import firebase from 'firebase';
 
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
 import 'firebase/analytics';
@@ -12,6 +12,8 @@ import 'firebase/analytics';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
 // import 'firebase/firestore';
+
+import initializeFirebaseApp from "./FirebaseInitialization";
 
 
 // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
@@ -29,41 +31,8 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const initializeFirebaseApp = function () {
-  firebase.auth().onAuthStateChanged(function (user: User | null) {
-    if (user) {
-      // User is signed in.
-      // const {displayName, email, emailVerified, photoURL, uid, phoneNumber, providerData} = user;
-
-      user.getIdToken().then(function (accessToken: string) {
-        // document.getElementById('sign-in-status').textContent = 'Signed in';
-        // document.getElementById('sign-in').textContent = 'Sign out';
-        // document.getElementById('account-details').textContent = JSON.stringify({
-        //   displayName: displayName,
-        //   email: email,
-        //   emailVerified: emailVerified,
-        //   phoneNumber: phoneNumber,
-        //   photoURL: photoURL,
-        //   uid: uid,
-        //   accessToken: accessToken,
-        //   providerData: providerData
-        // }, null, '  ');
-        console.log('User signed in');
-      });
-    } else {
-      // User is signed out.
-      console.log('User signed out')
-      // document.getElementById('sign-in-status').textContent = 'Signed out';
-      // document.getElementById('sign-in').textContent = 'Sign in';
-      // document.getElementById('account-details').textContent = 'null';
-    }
-  }, function (error) {
-    console.error(error);
-  });
-};
-
 window.addEventListener('load', function () {
-  initializeFirebaseApp()
+  initializeFirebaseApp();
 });
 
 
