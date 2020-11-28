@@ -1,6 +1,6 @@
 import {gql} from "@apollo/client";
 
-const CertificationExams = gql`
+const CertificationExamsQuery = gql`
     query CertificationExams {
         certificationExams {
             id
@@ -11,4 +11,4 @@ const CertificationExams = gql`
     }
 `;
 
-export default CertificationExams;
+export default CertificationExamsQuery;
