@@ -3,9 +3,10 @@ import {Route, Switch} from 'react-router-dom';
 // import PropTypes from "prop-types";
 import WelcomeView from './views/WelcomeView';
 import FrontDoorView from './views/FrontDoorView';
-import CertificationExamView from "./views/CertificationExamView";
-import CertificationExamEditorView from "./views/CertificationExamEditorView";
-import QuizView from "./views/QuizView";
+import CertificationExamView from './views/CertificationExamView';
+import CertificationExamEditorView from './views/CertificationExamEditorView';
+import QuizView from './views/QuizView';
+import PracticeExamView from './views/PracticeExamView';
 
 
 function RoutesSwitch() {
@@ -18,14 +19,17 @@ function RoutesSwitch() {
       <Route path="/welcome">
         <WelcomeView/>
       </Route>
-      <Route path="/certification-exam/:id">
+      <Route exact path="/certification-exam/:id">
         <CertificationExamView/>
       </Route>
-      <Route path="/certification-exam/:id/editor">
+      <Route exact path="/certification-exam/:id/editor">
         <CertificationExamEditorView/>
       </Route>
-      <Route path="/certification-exam/:id/quiz">
+      <Route exact path="/certification-exam/:id/quiz">
         <QuizView/>
+      </Route>
+      <Route exact path="/certification-exam/:id/practice-exam">
+        <PracticeExamView/>
       </Route>
     </Switch>
   );
