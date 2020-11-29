@@ -3,7 +3,7 @@ import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
 import CertificationExamTopicsQuery from '../graphql/queries/CertificationExamTopicsQuery';
 
-function CertificationExamView() {
+function CertificationExamEditorView() {
   // @ts-ignore
   const { id } = useParams();
   const {loading, error, data} = useQuery(CertificationExamTopicsQuery, {
@@ -18,12 +18,9 @@ function CertificationExamView() {
   return (
     <div>
       <h1>{data.certificationExam.name}</h1>
-      {data.certificationExam.examTopics.nodes.map((examTopic: any) => {
-        return (<div key={examTopic.id}>{examTopic.name}</div>)
-      })}
     </div>
   );
 }
 
-export default CertificationExamView;
+export default CertificationExamEditorView;
 

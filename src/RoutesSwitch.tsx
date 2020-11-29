@@ -4,6 +4,8 @@ import {Route, Switch} from 'react-router-dom';
 import WelcomeView from './views/WelcomeView';
 import FrontDoorView from './views/FrontDoorView';
 import CertificationExamView from "./views/CertificationExamView";
+import CertificationExamEditorView from "./views/CertificationExamEditorView";
+import QuizView from "./views/QuizView";
 
 
 function RoutesSwitch() {
@@ -18,6 +20,12 @@ function RoutesSwitch() {
       </Route>
       <Route path="/certification-exam/:id">
         <CertificationExamView/>
+      </Route>
+      <Route path="/certification-exam/:id/editor">
+        <CertificationExamEditorView/>
+      </Route>
+      <Route path="/certification-exam/:id/quiz">
+        <QuizView/>
       </Route>
     </Switch>
   );
