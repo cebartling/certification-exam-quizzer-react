@@ -19,7 +19,7 @@ function CertificationExamEditorView() {
   return (
     <div>
       <h1>{data.certificationExam.name}</h1>
-      <ExamQuestionForm certificationExamId={data.certificationExam.id}/>
+      <ExamQuestionForm certificationExamId={data.certificationExam.id} />
     </div>
   );
 }

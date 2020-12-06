@@ -1,17 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
+import {useMutation} from "@apollo/client";
+import {v4 as uuidv4} from 'uuid';
+import CreateExamQuestionMutation from "../../graphql/mutations/CreateExamQuestionMutation";
+import {toast} from "react-toastify";
 
 type ExamQuestionFormProps = {
-  certificationExamId: string
+  certificationExamId: string,
 };
 
 function ExamQuestionForm({certificationExamId}: ExamQuestionFormProps) {
   const {register, handleSubmit, watch, errors} = useForm();
+  const [createExamQuestion] = useMutation(CreateExamQuestionMutation);
+  let examQuestionId: string;
 
-  const onSubmit = (data: any) => {
-    console.log(watch('questionText'));
-    console.log(watch('answerType'));
+  const onSubmit = async (formData: any) => {
+    try {
+      const result = await createExamQuestion({
+        variables: {
+          input: {
+            questionText: watch('questionText'),
+            singleAnswer: watch('answerType') === 'single',
+            certificationExamId,
+            difficulty: 1,
+            clientMutationId: uuidv4()
+          }
+        }
+      });
+      examQuestionId = result.data.createExamQuestion.examQuestion.id;
+      toast.success(`Created new exam question.`, {position: toast.POSITION.BOTTOM_RIGHT});
+    } catch (e) {
+      const message = 'Unable to create new exam question.';
+      console.error(message, e);
+      toast.error(message, {position: toast.POSITION.BOTTOM_RIGHT});
+    }
   };
 
   return (
@@ -42,10 +65,10 @@ function ExamQuestionForm({certificationExamId}: ExamQuestionFormProps) {
                    value="single"
                    ref={register}
                    defaultChecked/>
-              <label className="form-check-label"
-                     htmlFor="singleAnswer">
-                Single answer
-              </label>
+            <label className="form-check-label"
+                   htmlFor="singleAnswer">
+              Single answer
+            </label>
           </div>
           <div className="form-check">
             <input className="form-check-input"
@@ -54,10 +77,10 @@ function ExamQuestionForm({certificationExamId}: ExamQuestionFormProps) {
                    id="multipleAnswers"
                    ref={register}
                    value="multiple"/>
-              <label className="form-check-label"
-                     htmlFor="multipleAnswers">
-                Multiple answers
-              </label>
+            <label className="form-check-label"
+                   htmlFor="multipleAnswers">
+              Multiple answers
+            </label>
           </div>
         </div>
       </div>
