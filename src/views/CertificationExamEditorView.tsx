@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
 import CertificationExamTopicsQuery from '../graphql/queries/CertificationExamTopicsQuery';
-import ExamQuestionForm from '../components/editor/ExamQuestionForm';
+import ExamQuestionForm from '../components/ExamQuestionForm';
 
 function CertificationExamEditorView() {
   // @ts-ignore

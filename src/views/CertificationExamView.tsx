@@ -33,7 +33,7 @@ function CertificationExamView() {
               <li>Create new questions</li>
               <li>Categorize questions by topics</li>
             </ul>
-            <Link to={`/certification-exam/${id}/editor`}
+            <Link to={`/certification-exam/${id}/questions`}
                   className="btn btn-lg btn-block btn-outline-primary">
               Contribute
             </Link>
@@ -72,7 +72,7 @@ function CertificationExamView() {
       </div>
     </div>
   );
-}
+};
 
 export default CertificationExamView;
 
