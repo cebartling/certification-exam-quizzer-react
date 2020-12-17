@@ -1,10 +1,10 @@
 import {types} from "mobx-state-tree";
 
 export const UserModel = types.model({
-  displayName: types.optional(types.string, ''),
+  displayName: types.maybeNull(types.string),
   email: types.optional(types.string, ''),
   emailVerified: types.optional(types.boolean, false),
-  photoURL: types.optional(types.string, ''),
+  photoURL: types.maybeNull(types.string),
   uid: types.optional(types.string, ''),
   phoneNumber: types.maybeNull(types.string),
   accessToken: types.optional(types.string, '')
