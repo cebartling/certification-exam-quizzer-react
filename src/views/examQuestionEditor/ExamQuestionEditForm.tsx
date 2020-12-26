@@ -11,13 +11,12 @@ type ExamQuestionEditFormProps = {
 
 function ExamQuestionEditForm({examQuestion}: ExamQuestionEditFormProps) {
   const {register, handleSubmit, watch, errors} = useForm();
-  const [createExamQuestion] = useMutation(UpdateExamQuestionMutation);
-  let examQuestionId: string;
+  const [updateExamQuestion] = useMutation(UpdateExamQuestionMutation);
   const certificationExamId = examQuestion.certificationExam.id;
 
   const onSubmit = async (formData: any) => {
     try {
-      const result = await createExamQuestion({
+      await updateExamQuestion({
         variables: {
           input: {
             id: examQuestion.id,
@@ -29,7 +28,6 @@ function ExamQuestionEditForm({examQuestion}: ExamQuestionEditFormProps) {
           }
         }
       });
-      examQuestionId = result.data.createExamQuestion.examQuestion.id;
       toast.success(`Updated existing exam question.`, {position: toast.POSITION.BOTTOM_RIGHT});
     } catch (e) {
       const message = 'Unable to update existing exam question.';
@@ -83,7 +81,6 @@ function ExamQuestionEditForm({examQuestion}: ExamQuestionEditFormProps) {
                id="multipleAnswers"
                ref={register}
                value="multiple"
-               defaultChecked
         />
       );
     }
@@ -101,7 +98,7 @@ function ExamQuestionEditForm({examQuestion}: ExamQuestionEditFormProps) {
             id="questionText"
             ref={register({required: true})}
             className="form-control"
-            value={examQuestion.questionText}>
+            defaultValue={examQuestion.questionText}>
           </textarea>
           {errors.questionText && <span className="text-danger">This field is required</span>}
         </div>
