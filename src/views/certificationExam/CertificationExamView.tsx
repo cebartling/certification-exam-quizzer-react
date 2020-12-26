@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
-import CertificationExamTopicsQuery from '../graphql/queries/CertificationExamTopicsQuery';
+import CertificationExamTopicsQuery from '../../graphql/queries/CertificationExamTopicsQuery';
 import {Link} from "react-router-dom";
 
 function CertificationExamView() {

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
-import {useMutation} from "@apollo/client";
+import {useMutation} from '@apollo/client';
 import {v4 as uuidv4} from 'uuid';
-import CreateExamQuestionMutation from "../graphql/mutations/CreateExamQuestionMutation";
-import {toast} from "react-toastify";
+import CreateExamQuestionMutation from '../../graphql/mutations/CreateExamQuestionMutation';
+import {toast} from 'react-toastify';
 
 type ExamQuestionFormProps = {
   certificationExamId: string,

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useQuery} from '@apollo/client';
-import CertificationExamsQuery from '../graphql/queries/CertificationExamsQuery';
-import CertificationExamListItem from '../components/CertificationExamListItem';
+import CertificationExamsQuery from '../../graphql/queries/CertificationExamsQuery';
+import CertificationExamListItem from './CertificationExamListItem';
 
 function WelcomeView() {
   const {loading, error, data} = useQuery(CertificationExamsQuery);

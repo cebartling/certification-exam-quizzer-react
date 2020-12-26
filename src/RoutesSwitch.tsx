@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import WelcomeView from './views/WelcomeView';
-import FrontDoorView from './views/FrontDoorView';
-import CertificationExamView from './views/CertificationExamView';
-import CertificationExamEditorView from './views/CertificationExamEditorView';
-import QuizView from './views/QuizView';
-import PracticeExamView from './views/PracticeExamView';
-import ExamQuestionListView from './views/ExamQuestionListView';
+import WelcomeView from './views/welcome/WelcomeView';
+import FrontDoorView from './views/frontDoor/FrontDoorView';
+import CertificationExamView from './views/certificationExam/CertificationExamView';
+import CertificationExamEditorView from './views/certificationExamEditor/CertificationExamEditorView';
+import QuizView from './views/quiz/QuizView';
+import PracticeExamView from './views/practiceExam/PracticeExamView';
+import ExamQuestionListView from './views/examQuestionList/ExamQuestionListView';
 
 
 function RoutesSwitch() {

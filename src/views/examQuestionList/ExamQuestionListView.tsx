@@ -1,8 +1,8 @@
 import React from 'react';
 import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
-import CertificationExamQuestionsQuery from '../graphql/queries/CertificationExamQuestionsQuery';
-import ExamQuestionListItem from '../components/ExamQuestionListItem';
+import CertificationExamQuestionsQuery from '../../graphql/queries/CertificationExamQuestionsQuery';
+import ExamQuestionListItem from './ExamQuestionListItem';
 import './ExamQuestionListView.scss';
 
 function ExamQuestionView() {
