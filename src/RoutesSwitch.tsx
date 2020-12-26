@@ -3,7 +3,8 @@ import {Route, Switch} from 'react-router-dom';
 import WelcomeView from './views/welcome/WelcomeView';
 import FrontDoorView from './views/frontDoor/FrontDoorView';
 import CertificationExamView from './views/certificationExam/CertificationExamView';
-import CertificationExamEditorView from './views/certificationExamEditor/CertificationExamEditorView';
+import ExamQuestionEditorCreateView from './views/examQuestionEditor/ExamQuestionEditorCreateView';
+import ExamQuestionEditorEditView from './views/examQuestionEditor/ExamQuestionEditorEditView';
 import QuizView from './views/quiz/QuizView';
 import PracticeExamView from './views/practiceExam/PracticeExamView';
 import ExamQuestionListView from './views/examQuestionList/ExamQuestionListView';
@@ -26,10 +27,10 @@ function RoutesSwitch() {
         <ExamQuestionListView/>
       </Route>
       <Route exact path="/certification-exam/:id/editor">
-        <CertificationExamEditorView/>
+        <ExamQuestionEditorCreateView/>
       </Route>
       <Route exact path="/certification-exam/:id/editor/:questionId">
-        <CertificationExamEditorView/>
+        <ExamQuestionEditorEditView/>
       </Route>
       <Route exact path="/certification-exam/:id/quiz">
         <QuizView/>

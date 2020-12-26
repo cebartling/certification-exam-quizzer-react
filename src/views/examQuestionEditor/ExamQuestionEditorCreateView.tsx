@@ -2,9 +2,9 @@ import React from 'react';
 import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
 import CertificationExamTopicsQuery from '../../graphql/queries/CertificationExamTopicsQuery';
-import ExamQuestionForm from './ExamQuestionForm';
+import ExamQuestionCreateForm from './ExamQuestionCreateForm';
 
-function CertificationExamEditorView() {
+function ExamQuestionEditorCreateView() {
   // @ts-ignore
   const {id} = useParams();
   const {loading, error, data} = useQuery(CertificationExamTopicsQuery, {
@@ -19,10 +19,10 @@ function CertificationExamEditorView() {
   return (
     <div>
       <h1>{data.certificationExam.name}</h1>
-      <ExamQuestionForm certificationExamId={data.certificationExam.id} />
+      <ExamQuestionCreateForm certificationExamId={data.certificationExam.id} />
     </div>
   );
 }
 
-export default CertificationExamEditorView;
+export default ExamQuestionEditorCreateView;
 

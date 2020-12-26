@@ -1,16 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {useForm} from 'react-hook-form';
 import {useMutation} from '@apollo/client';
 import {v4 as uuidv4} from 'uuid';
 import CreateExamQuestionMutation from '../../graphql/mutations/CreateExamQuestionMutation';
 import {toast} from 'react-toastify';
 
-type ExamQuestionFormProps = {
+type ExamQuestionCreateFormProps = {
   certificationExamId: string,
 };
 
-function ExamQuestionForm({certificationExamId}: ExamQuestionFormProps) {
+function ExamQuestionCreateForm({certificationExamId}: ExamQuestionCreateFormProps) {
   const {register, handleSubmit, watch, errors} = useForm();
   const [createExamQuestion] = useMutation(CreateExamQuestionMutation);
   let examQuestionId: string;
@@ -96,8 +95,4 @@ function ExamQuestionForm({certificationExamId}: ExamQuestionFormProps) {
   );
 }
 
-ExamQuestionForm.propTypes = {
-  certificationExamId: PropTypes.string.isRequired
-};
-
-export default ExamQuestionForm;
+export default ExamQuestionCreateForm;
