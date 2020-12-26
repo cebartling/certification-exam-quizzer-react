@@ -7,7 +7,7 @@ import './ExamQuestionListView.scss';
 
 function ExamQuestionView() {
   // @ts-ignore
-  const { id } = useParams();
+  const {id} = useParams();
   const {loading, error, data} = useQuery(CertificationExamQuestionsQuery, {
     variables: {
       id: id,
@@ -23,7 +23,11 @@ function ExamQuestionView() {
       <h2>Questions</h2>
       <div className="exam-question-list">
         {data.certificationExam.examQuestions.edges.map((examQuestion: any) => {
-          return (<ExamQuestionListItem examQuestion={examQuestion} key={examQuestion.node.id} />);
+          return (
+            <ExamQuestionListItem certificationExamId={id}
+                                  examQuestion={examQuestion}
+                                  key={examQuestion.node.id}/>
+          );
         })}
       </div>
     </div>

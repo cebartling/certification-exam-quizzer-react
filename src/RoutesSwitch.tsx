@@ -28,6 +28,9 @@ function RoutesSwitch() {
       <Route exact path="/certification-exam/:id/editor">
         <CertificationExamEditorView/>
       </Route>
+      <Route exact path="/certification-exam/:id/editor/:questionId">
+        <CertificationExamEditorView/>
+      </Route>
       <Route exact path="/certification-exam/:id/quiz">
         <QuizView/>
       </Route>
