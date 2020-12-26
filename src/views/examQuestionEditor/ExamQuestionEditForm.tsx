@@ -4,6 +4,7 @@ import {useMutation} from '@apollo/client';
 import {v4 as uuidv4} from 'uuid';
 import {toast} from 'react-toastify';
 import UpdateExamQuestionMutation from '../../graphql/mutations/UpdateExamQuestionMutation';
+import {useHistory} from 'react-router';
 
 type ExamQuestionEditFormProps = {
   examQuestion: any,
@@ -11,6 +12,7 @@ type ExamQuestionEditFormProps = {
 
 function ExamQuestionEditForm({examQuestion}: ExamQuestionEditFormProps) {
   const {register, handleSubmit, watch, errors} = useForm();
+  const history = useHistory();
   const [updateExamQuestion] = useMutation(UpdateExamQuestionMutation);
   const certificationExamId = examQuestion.certificationExam.id;
 
@@ -28,6 +30,7 @@ function ExamQuestionEditForm({examQuestion}: ExamQuestionEditFormProps) {
           }
         }
       });
+      history.push(`/certification-exam/${certificationExamId}/questions?shouldRefetch=true`);
       toast.success(`Updated existing exam question.`, {position: toast.POSITION.BOTTOM_RIGHT});
     } catch (e) {
       const message = 'Unable to update existing exam question.';

@@ -4,6 +4,7 @@ import {useMutation} from '@apollo/client';
 import {v4 as uuidv4} from 'uuid';
 import CreateExamQuestionMutation from '../../graphql/mutations/CreateExamQuestionMutation';
 import {toast} from 'react-toastify';
+import {useHistory} from 'react-router';
 
 type ExamQuestionCreateFormProps = {
   certificationExamId: string,
@@ -11,6 +12,7 @@ type ExamQuestionCreateFormProps = {
 
 function ExamQuestionCreateForm({certificationExamId}: ExamQuestionCreateFormProps) {
   const {register, handleSubmit, watch, errors} = useForm();
+  const history = useHistory();
   const [createExamQuestion] = useMutation(CreateExamQuestionMutation);
   let examQuestionId: string;
 
@@ -28,6 +30,7 @@ function ExamQuestionCreateForm({certificationExamId}: ExamQuestionCreateFormPro
         }
       });
       examQuestionId = result.data.createExamQuestion.examQuestion.id;
+      history.push(`/certification-exam/${certificationExamId}/questions?shouldRefetch=true`);
       toast.success(`Created new exam question.`, {position: toast.POSITION.BOTTOM_RIGHT});
     } catch (e) {
       const message = 'Unable to create new exam question.';
