@@ -2,7 +2,8 @@ import React from 'react';
 import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
 import ExamQuestionQuery from '../../graphql/queries/ExamQuestionQuery';
-import ExamQuestionEditForm from "./ExamQuestionEditForm";
+import ExamQuestionEditForm from './ExamQuestionEditForm';
+import ExamQuestionResponseEditor from './ExamQuestionResponseEditor';
 
 type ExamQuestionEditorEditViewRouteParams = {
   id: string,
@@ -23,7 +24,8 @@ function ExamQuestionEditorCreateView() {
   return (
     <div>
       <h1>{data.examQuestion.certificationExam.name}</h1>
-      <ExamQuestionEditForm examQuestion={data.examQuestion} />
+      <ExamQuestionEditForm examQuestion={data.examQuestion}/>
+      <ExamQuestionResponseEditor examQuestion={data.examQuestion}/>
     </div>
   );
 }

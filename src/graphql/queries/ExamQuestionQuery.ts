@@ -11,6 +11,17 @@ const ExamQuestionQuery = gql`
                 id
                 name
             }
+            examQuestionResponses {
+                pageInfo {
+                    startCursor
+                    endCursor
+                    hasNextPage
+                    hasPreviousPage
+                }
+                nodes {
+                    id
+                }
+            }
             createdAt
             updatedAt
         }

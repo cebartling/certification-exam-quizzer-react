@@ -21,14 +21,17 @@ function ExamQuestionView() {
       id: id,
     }
   });
+
+  async function refreshQuery() {
+    await refetch();
+    history.push(`/certification-exam/${id}/questions`);
+  }
+
   useEffect(() => {
     if (queryParameters.get('shouldRefetch')) {
-      // TODO: Migrate this to async/await
-      refetch().then(() => {
-        history.push(`/certification-exam/${id}/questions`);
-      });
+      refreshQuery();
     }
-  }, []);
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
