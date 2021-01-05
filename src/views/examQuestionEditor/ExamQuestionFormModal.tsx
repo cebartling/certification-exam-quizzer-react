@@ -6,6 +6,7 @@ import {useMutation} from '@apollo/client';
 import {v4 as uuidv4} from 'uuid';
 import CreateExamQuestionMutation from '../../graphql/mutations/CreateExamQuestionMutation';
 import UpdateExamQuestionMutation from '../../graphql/mutations/UpdateExamQuestionMutation';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 type ExamQuestionFormModalProps = {
   certificationExamId: string,
@@ -77,6 +78,24 @@ function ExamQuestionFormModal({certificationExamId, examQuestion, refetchQuery}
     }
   };
 
+  function renderAddButton() {
+    return (
+      <Button variant="primary" onClick={showDialog}>
+        <FontAwesomeIcon icon={"plus"}/>
+        Add new exam question
+      </Button>
+    );
+  }
+
+  function renderEditButton() {
+    return (
+      <Button variant="primary" onClick={showDialog}>
+        <FontAwesomeIcon icon={"edit"}/>
+        Edit exam question
+      </Button>
+    );
+  }
+
   return (
     <div
       onKeyDown={e => e.stopPropagation()}
@@ -84,13 +103,14 @@ function ExamQuestionFormModal({certificationExamId, examQuestion, refetchQuery}
       onFocus={e => e.stopPropagation()}
       onMouseOver={e => e.stopPropagation()}
       onSubmit={e => e.stopPropagation()}>
-      <Button variant="primary" onClick={showDialog}>
-        Add exam question
-      </Button>
+      {!examQuestion && renderAddButton()}
+      {examQuestion && renderEditButton()}
 
       <Modal show={show} onHide={closeDialog} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>Exam question response</Modal.Title>
+          <Modal.Title>
+            Exam question
+          </Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Modal.Body>

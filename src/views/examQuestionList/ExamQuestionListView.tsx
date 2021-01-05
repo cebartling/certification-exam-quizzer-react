@@ -7,6 +7,7 @@ import './ExamQuestionListView.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Link} from 'react-router-dom';
 import useQueryParameters from '../../hooks/UseQueryParameters';
+import ExamQuestionFormModal from "../examQuestionEditor/ExamQuestionFormModal";
 
 type ExamQuestionViewRouterParams = {
   id: string,
@@ -41,10 +42,7 @@ function ExamQuestionView() {
       <h1>{data.certificationExam.name}</h1>
       <h2>Questions</h2>
       <div>
-        <Link to={`/certification-exam/${id}/editor`}
-              className="btn btn-outline-success">
-          <FontAwesomeIcon icon={"plus"}/>
-        </Link>
+        <ExamQuestionFormModal certificationExamId={id} refetchQuery={refetch}/>
       </div>
       <div className="exam-question-list">
         {data.certificationExam.examQuestions.edges.map((examQuestion: any) => {
