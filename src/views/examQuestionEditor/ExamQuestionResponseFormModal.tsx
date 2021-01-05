@@ -8,9 +8,10 @@ import CreateExamQuestionResponseMutation from '../../graphql/mutations/CreateEx
 
 type ExamQuestionResponseFormModalProps = {
   examQuestion: any,
+  refetchQuery: Function,
 }
 
-function ExamQuestionResponseFormModal({examQuestion}: ExamQuestionResponseFormModalProps) {
+function ExamQuestionResponseFormModal({examQuestion, refetchQuery}: ExamQuestionResponseFormModalProps) {
   const [show, setShow] = useState(false);
   const {handleSubmit, register, watch, errors} = useForm();
   const [createExamQuestionResponse] = useMutation(CreateExamQuestionResponseMutation);
@@ -20,17 +21,18 @@ function ExamQuestionResponseFormModal({examQuestion}: ExamQuestionResponseFormM
 
   const onSubmit = async (formData: any) => {
     try {
-        await createExamQuestionResponse({
-          variables: {
-            input: {
-              responseText: watch('responseText'),
-              explanationText: watch('explanationText'),
-              correct: watch('isCorrect') === 'correct',
-              examQuestionId: examQuestion.id,
-              clientMutationId: uuidv4()
-            }
+      await createExamQuestionResponse({
+        variables: {
+          input: {
+            responseText: watch('responseText'),
+            explanationText: watch('explanationText'),
+            correct: watch('isCorrect') === 'correct',
+            examQuestionId: examQuestion.id,
+            clientMutationId: uuidv4()
           }
-        });
+        }
+      });
+      refetchQuery();
       toast.success(`Created new exam question response.`, {position: toast.POSITION.BOTTOM_RIGHT});
       setShow(false);
     } catch (e) {

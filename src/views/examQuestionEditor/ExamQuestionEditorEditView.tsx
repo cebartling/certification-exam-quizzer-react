@@ -3,7 +3,7 @@ import {useParams} from 'react-router';
 import {useQuery} from '@apollo/client';
 import ExamQuestionQuery from '../../graphql/queries/ExamQuestionQuery';
 import ExamQuestionEditForm from './ExamQuestionEditForm';
-import ExamQuestionResponseEditor from './ExamQuestionResponseEditor';
+import ExamQuestionResponses from './ExamQuestionResponses';
 
 type ExamQuestionEditorEditViewRouteParams = {
   id: string,
@@ -12,7 +12,7 @@ type ExamQuestionEditorEditViewRouteParams = {
 
 function ExamQuestionEditorCreateView() {
   const {questionId}: ExamQuestionEditorEditViewRouteParams = useParams();
-  const {loading, error, data} = useQuery(ExamQuestionQuery, {
+  const {loading, error, data, refetch} = useQuery(ExamQuestionQuery, {
     variables: {
       id: questionId
     }
@@ -25,10 +25,9 @@ function ExamQuestionEditorCreateView() {
     <div>
       <h1>{data.examQuestion.certificationExam.name}</h1>
       <ExamQuestionEditForm examQuestion={data.examQuestion}/>
-      <ExamQuestionResponseEditor examQuestion={data.examQuestion}/>
+      <ExamQuestionResponses examQuestion={data.examQuestion} refetchQuery={refetch}/>
     </div>
   );
 }
 
 export default ExamQuestionEditorCreateView;
-
