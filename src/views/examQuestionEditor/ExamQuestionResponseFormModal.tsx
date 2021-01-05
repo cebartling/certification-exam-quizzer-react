@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {Button, Form, Modal} from 'react-bootstrap';
 import {useForm} from 'react-hook-form';
+import {toast} from 'react-toastify';
+import {useMutation} from '@apollo/client';
+import {v4 as uuidv4} from 'uuid';
+import CreateExamQuestionResponseMutation from '../../graphql/mutations/CreateExamQuestionResponseMutation';
 
 type ExamQuestionResponseFormModalProps = {
   examQuestion: any,
@@ -8,34 +12,32 @@ type ExamQuestionResponseFormModalProps = {
 
 function ExamQuestionResponseFormModal({examQuestion}: ExamQuestionResponseFormModalProps) {
   const [show, setShow] = useState(false);
-  const {handleSubmit, register} = useForm();
+  const {handleSubmit, register, watch} = useForm();
+  const [createExamQuestionResponse] = useMutation(CreateExamQuestionResponseMutation);
 
   const closeDialog = () => setShow(false);
   const showDialog = () => setShow(true);
 
   const onSubmit = async (formData: any) => {
-    console.info('Submitting the form');
-    // try {
-    //   //   const result = await createExamQuestion({
-    //   //     variables: {
-    //   //       input: {
-    //   //         responseText: watch('responseText'),
-    //   //         explanationText: watch('explanationText'),
-    //   //         correct: watch('isCorrect') === 'correct',
-    //   //         examQuestionId: examQuestion.id,
-    //   //         clientMutationId: uuidv4()
-    //   //       }
-    //   //     }
-    //   //   });
-    //   //   examQuestionId = result.data.createExamQuestion.examQuestion.id;
-    //   //   // history.push(`/certification-exam/${certificationExamId}/questions?shouldRefetch=true`);
-    //   toast.success(`Created new exam question response.`, {position: toast.POSITION.BOTTOM_RIGHT});
-    //   setShow(false);
-    // } catch (e) {
-    //   const message = 'Unable to create new exam question response.';
-    //   console.error(message, e);
-    //   toast.error(message, {position: toast.POSITION.BOTTOM_RIGHT});
-    // }
+    try {
+        await createExamQuestionResponse({
+          variables: {
+            input: {
+              responseText: watch('responseText'),
+              explanationText: watch('explanationText'),
+              correct: watch('isCorrect') === 'correct',
+              examQuestionId: examQuestion.id,
+              clientMutationId: uuidv4()
+            }
+          }
+        });
+      toast.success(`Created new exam question response.`, {position: toast.POSITION.BOTTOM_RIGHT});
+      setShow(false);
+    } catch (e) {
+      const message = 'Unable to create new exam question response.';
+      console.error(message, e);
+      toast.error(message, {position: toast.POSITION.BOTTOM_RIGHT});
+    }
   };
 
   return (

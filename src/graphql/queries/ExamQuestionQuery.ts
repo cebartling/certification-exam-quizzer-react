@@ -12,14 +12,13 @@ const ExamQuestionQuery = gql`
                 name
             }
             examQuestionResponses {
-                pageInfo {
-                    startCursor
-                    endCursor
-                    hasNextPage
-                    hasPreviousPage
-                }
                 nodes {
                     id
+                    responseText
+                    explanationText
+                    correct
+                    createdAt
+                    updatedAt
                 }
             }
             createdAt

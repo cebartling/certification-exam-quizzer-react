@@ -14,11 +14,11 @@ function ExamQuestionCreateForm({certificationExamId}: ExamQuestionCreateFormPro
   const {register, handleSubmit, watch, errors} = useForm();
   const history = useHistory();
   const [createExamQuestion] = useMutation(CreateExamQuestionMutation);
-  let examQuestionId: string;
+  // let examQuestionId: string;
 
   const onSubmit = async (formData: any) => {
     try {
-      const result = await createExamQuestion({
+      await createExamQuestion({
         variables: {
           input: {
             questionText: watch('questionText'),
@@ -29,7 +29,7 @@ function ExamQuestionCreateForm({certificationExamId}: ExamQuestionCreateFormPro
           }
         }
       });
-      examQuestionId = result.data.createExamQuestion.examQuestion.id;
+      // result.data.createExamQuestion.examQuestion.id;
       history.push(`/certification-exam/${certificationExamId}/questions?shouldRefetch=true`);
       toast.success(`Created new exam question.`, {position: toast.POSITION.BOTTOM_RIGHT});
     } catch (e) {
