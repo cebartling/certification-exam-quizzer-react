@@ -12,7 +12,7 @@ type ExamQuestionResponseFormModalProps = {
 
 function ExamQuestionResponseFormModal({examQuestion}: ExamQuestionResponseFormModalProps) {
   const [show, setShow] = useState(false);
-  const {handleSubmit, register, watch} = useForm();
+  const {handleSubmit, register, watch, errors} = useForm();
   const [createExamQuestionResponse] = useMutation(CreateExamQuestionResponseMutation);
 
   const closeDialog = () => setShow(false);
@@ -60,15 +60,14 @@ function ExamQuestionResponseFormModal({examQuestion}: ExamQuestionResponseFormM
             <Form.Group controlId="responseText">
               <Form.Label>Response text</Form.Label>
               <Form.Control name="responseText" as="textarea" ref={register({required: true})}/>
-              <Form.Text className="text-muted">
-                This field is required.
+              <Form.Text className="text-danger">
+                {errors.responseText && <span>This field is required.</span>}
               </Form.Text>
             </Form.Group>
             <Form.Group controlId="explanationText">
               <Form.Label>Explanation text</Form.Label>
               <Form.Control name="explanationText" as="textarea" ref={register({required: false})}/>
               <Form.Text className="text-muted">
-                This field is not required.
               </Form.Text>
             </Form.Group>
             <Form.Group id="correctResponse">
