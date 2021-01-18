@@ -4,10 +4,12 @@ import {ApolloProvider} from "@apollo/client";
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import apolloClient from "./ApolloClient";
+import apolloClient from './ApolloClient';
+import {RecoilRoot,} from 'recoil';
 
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from 'firebase';
+
 
 // If you enabled Analytics in your project, add the Firebase SDK for Analytics
 import 'firebase/analytics';
@@ -15,7 +17,7 @@ import 'firebase/analytics';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
 // import 'firebase/firestore';
-import initializeFirebaseApp from "./FirebaseInitialization";
+import initializeFirebaseApp from './FirebaseInitialization';
 
 
 // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
@@ -40,9 +42,11 @@ window.addEventListener('load', function () {
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
-      <App/>
-    </ApolloProvider>
+    <RecoilRoot>
+      <ApolloProvider client={apolloClient}>
+        <App/>
+      </ApolloProvider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById('root')
 );
