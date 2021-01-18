@@ -17,7 +17,6 @@ import 'firebase/analytics';
 // Add the Firebase products that you want to use
 import 'firebase/auth';
 // import 'firebase/firestore';
-import initializeFirebaseApp from './FirebaseInitialization';
 
 
 // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
@@ -35,9 +34,6 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-window.addEventListener('load', function () {
-  initializeFirebaseApp();
-});
 
 
 ReactDOM.render(
